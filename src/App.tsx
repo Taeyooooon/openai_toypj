@@ -11,7 +11,7 @@ function App() {
   const colorCodes = result.match(colorCodeRegex);
 
   useEffect(() => {}, [result]);
-  const splitResult = result?.split('.');
+  const splitResult = result && result.split('.');
   console.log('split : ', splitResult);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -25,22 +25,24 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen '>
-      <h1 className=' text-4xl font-bold mb-8'>색깔 추천</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          type='text'
-          placeholder='이름'
-          value={inputValue}
-          onChange={onChange}
-          required
-          className='border-2 border-black rounded-md p-2 text-center mb-6'
-        />
-      </form>
+    <div className='flex justify-center items-center h-screen '>
+      <div className=' bg-stone-300 p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden'>
+        <h1 className=' text-4xl font-bold mb-8'>퍼스널 컬러</h1>
+        <form onSubmit={onSubmit}>
+          <input
+            type='text'
+            placeholder='이름을 입력하세요'
+            value={inputValue}
+            onChange={onChange}
+            required
+            className='border-2 border-black rounded-md p-2 text-center mb-6'
+          />
+        </form>
 
-      <GptResponse splitResult={splitResult} />
+        {splitResult && <GptResponse splitResult={splitResult} />}
 
-      <RecommendColor colorCodes={colorCodes} />
+        {colorCodes && <RecommendColor colorCodes={colorCodes} />}
+      </div>
     </div>
   );
 }
