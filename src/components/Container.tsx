@@ -9,7 +9,7 @@ export default function Container() {
   const [inputValue, setInputValue] = useState<string>('');
   const [result, setResult] = useState<string>('');
 
-  const { mutate, isLoading } = useMutation(['gpt'], () =>
+  const { mutate, isLoading, isError } = useMutation(['gpt'], () =>
     connectGPT(inputValue, setResult)
   );
 
@@ -46,6 +46,12 @@ export default function Container() {
 
         {isLoading && (
           <PacmanLoader className=' mb-6' color='#5f5959' size={25} />
+        )}
+
+        {isError && (
+          <div className=' text-red-500 font-semibold mb-6'>
+            에러가 발생했습니다.
+          </div>
         )}
 
         {splitResult && <GptResponse splitResult={splitResult} />}
