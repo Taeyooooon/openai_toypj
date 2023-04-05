@@ -24,6 +24,9 @@ export default function RecommendColor({ colorCodes }: Props) {
           );
         })}
       </ul>
+      <div className=' mt-8 font-semibold text-center'>
+        색깔 클릭 시 색상코드 복사!
+      </div>
     </section>
   );
 }

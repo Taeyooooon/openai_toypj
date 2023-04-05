@@ -19,14 +19,7 @@ export default function Container() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('inputValue : ', inputValue);
-
-    // connectGPT(inputValue, setResult);
     mutate();
-    console.log('mutate : ', mutate);
-    console.log('isLoading : ', isLoading);
-    console.log('error : ', error);
-    console.log('data : ', data);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,11 +29,11 @@ export default function Container() {
   return (
     <div className='flex justify-center items-center h-screen '>
       <div className=' bg-stone-300 p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden'>
-        <h1 className=' text-4xl font-bold mb-8'>퍼스널 컬러</h1>
+        <h1 className=' text-4xl font-bold mb-8'>입력값과 어울리는 색조합 3가지</h1>
         <form onSubmit={onSubmit}>
           <input
             type='text'
-            placeholder='이름을 입력하세요'
+            placeholder='색깔을 입력하세요'
             value={inputValue}
             onChange={onChange}
             required
