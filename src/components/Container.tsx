@@ -4,11 +4,15 @@ import RecommendColor from './RecommendColor';
 import { connectGPT } from '../api/connectGPT';
 import { useMutation } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
+import { useDarkMode } from '../context/DarkModeContext';
+import { HiMoon, HiSun } from 'react-icons/hi';
 
 export default function Container() {
   const [inputValue, setInputValue] = useState<string>('');
   const [result, setResult] = useState<string>('');
 
+  const { darkMode, toggleDarkMode } = useDarkMode();
+  console.log(darkMode);
   const { mutate, isLoading, isError } = useMutation(['gpt'], () =>
     connectGPT(inputValue, setResult)
   );
@@ -29,10 +33,8 @@ export default function Container() {
 
   return (
     <div className='flex justify-center items-center h-screen '>
-      <div className=' bg-stone-300 p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden'>
-        <h1 className=' text-4xl font-bold mb-8'>
-          입력값과 어울리는 색조합 3가지
-        </h1>
+      <div className=' bg-primary dark:bg-primary-dark text-secondary dark:text-secondary-dark p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden transition'>
+        <h1 className=' text-4xl font-bold mb-8'>색조합 3가지 추천</h1>
         <form onSubmit={onSubmit}>
           <input
             type='text'
@@ -40,7 +42,7 @@ export default function Container() {
             value={inputValue}
             onChange={onChange}
             required
-            className='border-2 border-black rounded-md p-2 text-center mb-6'
+            className='border border-primary dark:border-primary-dark bg-secondary dark:bg-secondary-dark text-secondary dark:text-secondary-dark rounded-md p-2 text-center mb-6'
           />
         </form>
 
@@ -57,6 +59,11 @@ export default function Container() {
         {splitResult && <GptResponse splitResult={splitResult} />}
 
         {colorCodes && <RecommendColor colorCodes={colorCodes} />}
+
+        <button onClick={toggleDarkMode} className='cursor-pointer text-2xl'>
+          {!darkMode && <HiMoon />}
+          {darkMode && <HiSun />}
+        </button>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ interface Props {
 
 export default function GptResponse({ splitResult }: Props) {
   return (
-    <section className='p-12 mb-8 border border-1 border-black'>
+    <section className='p-12 mb-8 border border-1 rounded-md border-primary dark:border-primary-dark bg-secondary dark:bg-secondary-dark'>
       <ul>
         {splitResult.map((item) => {
           return (

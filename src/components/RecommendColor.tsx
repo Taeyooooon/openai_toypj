@@ -16,15 +16,17 @@ export default function RecommendColor({ colorCodes }: Props) {
             <li
               key={code}
               style={{ backgroundColor: code }}
-              className={` font-bold cursor-pointer w-40 h-40 flex items-center justify-center rounded-xl hover:scale-105 transform transition ease-in-out duration-300`}
+              className={`cursor-pointer w-40 h-40 flex items-center justify-center rounded-xl hover:scale-105 transform transition ease-in-out duration-300`}
               onClick={() => onColorClick(code)}
             >
-              {code}
+              <span className=' font-bold p-1 rounded-md text-primary backdrop-blur-sm	bg-white/20 '>
+                {code}
+              </span>
             </li>
           );
         })}
       </ul>
-      <div className=' mt-8 font-semibold text-center'>
+      <div className=' my-8 font-semibold text-center'>
         색깔 클릭 시 색상코드 복사!
       </div>
     </section>
