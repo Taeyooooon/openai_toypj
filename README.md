@@ -1,3 +1,13 @@
+# Deployed with Vercel
+https://openai-toypj.vercel.app/
+
+Made with OpenAI API
+TypeScript, React, TailwindCSS
+<br>
+Tanstack Query (React Query), Axios, Context API (Darkmode)
+
+![색조합](https://user-images.githubusercontent.com/83495141/230324215-c874874e-21cf-47ca-a7a9-b8ac61c6dbaa.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
