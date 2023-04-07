@@ -29,17 +29,17 @@ export default function DarkModeBtn() {
     <>
       <button
         onClick={toggleDarkMode}
-        className=' relative cursor-pointer text-3xl'
+        className=' relative cursor-pointer text-3xl mt-4'
       >
         {transitions((style, item) => {
           return item ? (
-            <div className='absolute -translate-x-1/2'>
+            <div className='absolute top-1/2 -translate-x-1/2 -translate-y-1/2'>
               <animated.div style={style}>
                 <HiSun />
               </animated.div>
             </div>
           ) : (
-            <div className='absolute -translate-x-1/2'>
+            <div className='absolute top-1/2 -translate-x-1/2 -translate-y-1/2'>
               <animated.div style={style}>
                 <HiMoon />
               </animated.div>
