@@ -1,11 +1,17 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-interface IDarkModeContext {
+interface DarkModeContextType {
   darkMode: boolean;
   toggleDarkMode: () => void;
 }
 
-export const DarkModeContext = createContext<IDarkModeContext>({
+export const DarkModeContext = createContext<DarkModeContextType>({
   darkMode: false,
   toggleDarkMode: () => {},
 });
@@ -20,7 +26,7 @@ const updateDarkMode = (darkMode: boolean) => {
   }
 };
 
-export const DarkModeProvider = ({ children }: any) => {
+export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -44,4 +50,4 @@ export const DarkModeProvider = ({ children }: any) => {
   );
 };
 
-export const useDarkMode = (): IDarkModeContext => useContext(DarkModeContext);
+export const useDarkMode = () => useContext(DarkModeContext);

@@ -4,21 +4,26 @@ import RecommendColor from './RecommendColor';
 import { connectGPT } from '../api/connectGPT';
 import { useMutation } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
-import { useDarkMode } from '../context/DarkModeContext';
-import { HiMoon, HiSun } from 'react-icons/hi';
+import DarkModeBtn from './DarkModeBtn';
 
 export default function Container() {
   const [inputValue, setInputValue] = useState<string>('');
   const [result, setResult] = useState<string>('');
-
-  const { darkMode, toggleDarkMode } = useDarkMode();
-  console.log(darkMode);
-  const { mutate, isLoading, isError } = useMutation(['gpt'], () =>
-    connectGPT(inputValue, setResult)
+  const { mutate, isLoading, isError } = useMutation(
+    ['gpt', inputValue],
+    () => connectGPT(inputValue),
+    {
+      onSuccess: (data) => {
+        setResult(data);
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    }
   );
 
   const colorCodeRegex = /#[A-Fa-f0-9]{6}\b/g;
-  const colorCodes = result.match(colorCodeRegex);
+  const colorCodes = result && result.match(colorCodeRegex);
 
   const splitResult = result && result.split('.');
 
@@ -33,7 +38,7 @@ export default function Container() {
 
   return (
     <div className='flex justify-center items-center h-screen '>
-      <div className=' bg-primary dark:bg-primary-dark text-secondary dark:text-secondary-dark p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden transition'>
+      <section className=' bg-primary dark:bg-primary-dark text-secondary dark:text-secondary-dark p-12 shadow-xl flex flex-col items-center rounded-lg overflow-hidden transition'>
         <h1 className=' text-4xl font-bold mb-8'>색조합 3가지 추천</h1>
         <form onSubmit={onSubmit}>
           <input
@@ -47,7 +52,7 @@ export default function Container() {
         </form>
 
         {isLoading && (
-          <PacmanLoader className=' mb-6' color='#5f5959' size={25} />
+          <PacmanLoader className=' mb-6' color='#ffee00' size={25} />
         )}
 
         {isError && (
@@ -60,11 +65,8 @@ export default function Container() {
 
         {colorCodes && <RecommendColor colorCodes={colorCodes} />}
 
-        <button onClick={toggleDarkMode} className='cursor-pointer text-2xl'>
-          {!darkMode && <HiMoon />}
-          {darkMode && <HiSun />}
-        </button>
-      </div>
+        <DarkModeBtn />
+      </section>
     </div>
   );
 }
