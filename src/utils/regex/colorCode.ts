@@ -1,0 +1,1 @@
+export const colorCodeRegex = /#[A-Fa-f0-9]{6}\b/g;

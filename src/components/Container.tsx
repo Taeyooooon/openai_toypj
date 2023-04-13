@@ -5,6 +5,7 @@ import { connectGPT } from '../api/connectGPT';
 import { useMutation } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
 import DarkModeBtn from './DarkModeBtn';
+import { colorCodeRegex } from '../utils/regex/colorCode';
 
 export default function Container() {
   const [inputValue, setInputValue] = useState<string>('');
@@ -22,7 +23,6 @@ export default function Container() {
     }
   );
 
-  const colorCodeRegex = /#[A-Fa-f0-9]{6}\b/g;
   const colorCodes = result && result.match(colorCodeRegex);
 
   const splitResult = result && result.split('.');
