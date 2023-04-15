@@ -7,7 +7,7 @@ interface Props {
   delay?: number;
 }
 
-const FadeIn = ({ children, duration = 500, delay = 0 }: Props) => {
+export default function FadeIn({ children, duration = 500, delay = 0 }: Props) {
   const fadeIn = useSpring({
     from: {
       opacity: 0,
@@ -20,6 +20,4 @@ const FadeIn = ({ children, duration = 500, delay = 0 }: Props) => {
   });
 
   return <animated.div style={fadeIn}>{children}</animated.div>;
-};
-
-export default FadeIn;
+}

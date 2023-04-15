@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Container from './components/Container';
+import MainContainer from './components/MainContainer';
 import { DarkModeProvider } from './context/DarkModeContext';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
-        <Container />
+        <MainContainer />
       </QueryClientProvider>
     </DarkModeProvider>
   );

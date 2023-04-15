@@ -8,7 +8,7 @@ import DarkModeBtn from './DarkModeBtn';
 import { colorCodeRegex } from '../utils/regex/colorCode';
 import FadeIn from './FadeIn';
 
-export default function Container() {
+export default function MainContainer() {
   const [inputValue, setInputValue] = useState<string>('');
   const [result, setResult] = useState<string>('');
 
