@@ -34,7 +34,7 @@ export default function MainContainer() {
     mutate();
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onColorInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -46,15 +46,37 @@ export default function MainContainer() {
         </FadeIn>
 
         <FadeIn delay={200}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className=' flex flex-col'>
+            <label
+              htmlFor='colorCode'
+              className=' text-center font-semibold mb-2'
+            >
+              색상 코드
+            </label>
+
             <input
               type='text'
-              placeholder='색깔을 입력하세요'
+              id='colorCode'
+              placeholder='#000000'
+              onChange={onColorInputChange}
               value={inputValue}
-              onChange={onChange}
+              className='border border-primary dark:border-primary-dark bg-secondary dark:bg-secondary-dark text-secondary dark:text-secondary-dark rounded-md p-2 text-center'
               required
-              className='border border-primary dark:border-primary-dark bg-secondary dark:bg-secondary-dark text-secondary dark:text-secondary-dark rounded-md p-2 text-center mb-6'
+              autoFocus
             />
+
+            <input
+              type='color'
+              onChange={onColorInputChange}
+              value={inputValue}
+              className='w-full mb-4 mt-4 cursor-pointer bg-secondary bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300'
+            />
+
+            {!isLoading && (
+              <button className='mb-6 rounded-md p-1 font-semibold bg-blue-300 dark:bg-blue-600'>
+                제출
+              </button>
+            )}
           </form>
         </FadeIn>
 
