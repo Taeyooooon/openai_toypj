@@ -5,7 +5,7 @@ import { connectGPT } from '../api/connectGPT';
 import { useMutation } from '@tanstack/react-query';
 import { PacmanLoader } from 'react-spinners';
 import DarkModeBtn from './DarkModeBtn';
-import { colorCodeRegex } from '../utils/regex/colorCode';
+import { colorCodeRegex, hexCodeRegex } from '../utils/regex/colorCode';
 import FadeIn from './FadeIn';
 
 export default function MainContainer() {
@@ -31,6 +31,9 @@ export default function MainContainer() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!hexCodeRegex.test(inputValue)) {
+      return alert('유효한 Hex 코드를 입력하세요.');
+    }
     mutate();
   };
 
